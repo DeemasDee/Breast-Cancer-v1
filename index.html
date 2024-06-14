@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Breast Cancer Prediction</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1 class="text-center mt-5">Breast Cancer Prediction</h1>
+    <form id="uploadForm" enctype="multipart/form-data" class="mt-5">
+      <div class="form-group">
+        <label for="imageInput">Upload an image:</label>
+        <input type="file" class="form-control-file" name="image" id="imageInput" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Predict</button>
+    </form>
+    <div id="result" class="mt-5 text-center"></div>
+  </div>
+  <script>
+    document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData();
+      const imageInput = document.getElementById('imageInput');
+      formData.append('image', imageInput.files[0]);
+
+      const response = await fetch('/predict', {
+        method: 'POST',
+        body: formData
+      });
+      const result = await response.json();
+      document.getElementById('result').innerHTML = `
+        <h3>Prediction: ${result.result}</h3>
+        <img src="${result.image}" alt="Uploaded Image" class="img-fluid mt-3">
+      `;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "breast_cancerv1",
+  "version": "1.0.0",
+  "description": "data set : https://www.kaggle.com/datasets/paultimothymooney/breast-histopathology-images",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@tensorflow/tfjs-node": "^4.20.0",
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1"
+  }
+}
